@@ -1,4 +1,7 @@
 from fastapi import FastAPI, APIRouter
+from fastapi.middleware.cors import CORSMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
+
 from func import *
 from routes import route1, route2
 
@@ -20,3 +23,5 @@ async def health():
 app.include_router(router)
 app.include_router(route1.router)
 app.include_router(route2.router)
+
+Instrumentator().instrument(app).expose(app)

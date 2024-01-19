@@ -1,1 +1,1 @@
-# fastapi_template
+# Jerry's Restful API template

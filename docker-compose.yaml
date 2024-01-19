@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app1:
+    build:
+      context: ./app
+    restart: unless-stopped
+    container_name: app
+    ports:
+      - 8000:8000
+    networks:
+      network
+
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      network
+
+networks:
+  network:
+    name: network
+    driver: bridge
