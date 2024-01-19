@@ -1,3 +1,7 @@
+import os 
+if not os.path.exists("logs"):
+    os.makedirs("logs", exist_ok=True)
+    
 bind = '0.0.0.0:8000'
 accesslog = "logs/access.log"
 errorlog = "logs/error.log"

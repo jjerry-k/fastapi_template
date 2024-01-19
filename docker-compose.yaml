@@ -1,15 +1,16 @@
 version: "3.8"
 
 services:
-  app1:
+  app:
     build:
       context: ./app
+    user: ${UID}:${GID}
     restart: unless-stopped
     container_name: app
+    volumes:
+      - ./app:/app
     ports:
       - 8000:8000
-    networks:
-      network
 
   prometheus:
     image: prom/prometheus:latest
@@ -19,10 +20,3 @@ services:
       - 9090:9090
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    networks:
-      network
-
-networks:
-  network:
-    name: network
-    driver: bridge

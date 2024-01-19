@@ -8,8 +8,6 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 from typing import Annotated
 
-if not os.path.exists("logs"):
-    os.makedirs("logs", exist_ok=True)
 logging.basicConfig(filename=f'logs/api.log', level=logging.INFO, format='[%(asctime)s] %(levelname)s in %(module)s: %(message)s')
 
 security = HTTPBasic()
