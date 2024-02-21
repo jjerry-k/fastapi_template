@@ -6,11 +6,13 @@ services:
       context: ./app
     user: ${UID}:${GID}
     restart: unless-stopped
-    container_name: app
+    container_name: fastapi
+    environment:
+      - PORT=${PORT}
     volumes:
       - ./app:/app
     ports:
-      - 8000:8000
+      - ${PORT}:${PORT}
 
   prometheus:
     image: prom/prometheus:latest

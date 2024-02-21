@@ -1,5 +1,4 @@
 import os
-import io
 import logging
 
 import secrets
@@ -8,7 +7,22 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 from typing import Annotated
 
+if not os.path.exists("logs"):
+    os.makedirs("logs", exist_ok=True)
 logging.basicConfig(filename=f'logs/api.log', level=logging.INFO, format='[%(asctime)s] %(levelname)s in %(module)s: %(message)s')
+
+
+def load_route(app):
+    import routes
+    route_path = "routes"
+    route_list = os.listdir(route_path)
+    for route in route_list:
+        try:
+            module = getattr(routes, route)
+            if hasattr(module, 'router'):
+                app.include_router(getattr(module, 'router'))
+        except AttributeError:
+            pass
 
 security = HTTPBasic()
 
