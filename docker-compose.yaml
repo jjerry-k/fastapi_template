@@ -8,16 +8,18 @@ services:
     restart: unless-stopped
     container_name: fastapi
     environment:
-      - PORT=${PORT}
+      - FASTAPI_PORT=${FASTAPI_PORT}
     volumes:
       - ./app:/app
     ports:
-      - ${PORT}:${PORT}
+      - ${FASTAPI_PORT}:${FASTAPI_PORT}
 
   prometheus:
     image: prom/prometheus:latest
     restart: unless-stopped
     container_name: prometheus
+    environment:
+      - FASTAPI_PORT=${FASTAPI_PORT}
     ports:
       - 9090:9090
     volumes:

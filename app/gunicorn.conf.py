@@ -2,7 +2,7 @@ import os
 if not os.path.exists("logs"):
     os.makedirs("logs", exist_ok=True)
     
-bind = f"0.0.0.0:{os.environ['PORT']}"
+bind = f"0.0.0.0:{os.environ['FASTAPI_PORT']}"
 accesslog = "logs/access.log"
 errorlog = "logs/error.log"
 workers = 1
