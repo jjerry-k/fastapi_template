@@ -1,6 +1,6 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
-from prometheus_fastapi_instrumentator import Instrumentator
+from prometheus_client import make_asgi_app
 
 from func import *
 
@@ -22,4 +22,5 @@ async def health():
 app.include_router(router)
 load_route(app)
 
-Instrumentator().instrument(app).expose(app)
+metrics_app = make_metrics_app()
+app.mount("/metrics", metrics_app)

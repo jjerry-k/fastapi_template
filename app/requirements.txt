@@ -2,4 +2,4 @@ fastapi
 python-multipart
 uvicorn
 gunicorn
-prometheus-fastapi-instrumentator
+prometheus_client
