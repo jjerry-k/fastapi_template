@@ -1,8 +1,9 @@
 import os 
 if not os.path.exists("logs"):
     os.makedirs("logs", exist_ok=True)
-    
-bind = f"0.0.0.0:{os.environ['FASTAPI_PORT']}"
+
+port = os.environ["FASTAPI_PORT"] if "FASTAPI_PORT" in os.environ else 8000
+bind = f"0.0.0.0:{port}"
 accesslog = "logs/access.log"
 errorlog = "logs/error.log"
 workers = 1
